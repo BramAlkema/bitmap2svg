@@ -1,0 +1,28 @@
+name: PNG to SVG
+
+on:
+  workflow_dispatch:
+    inputs:
+      src:
+        description: 'Folder containing PNG images'
+        default: images
+      dst:
+        description: 'Output folder for SVGs'
+        default: svgs
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install bitmap2svg
+        run: pip install .
+      - name: Convert images
+        run: python -m bitmap2svg.cli batch "${{ github.event.inputs.src }}" "${{ github.event.inputs.dst }}" --jobs 4 --quiet
+      - uses: actions/upload-artifact@v4
+        with:
+          name: svg-output
+          path: ${{ github.event.inputs.dst }}
