@@ -45,6 +45,14 @@ To process a batch of images, use:
 python -m bitmap2svg.cli batch path/to/images/ -o output_directory/
 ```
 
+The batch command also supports parallel processing. Use ``--jobs`` to set the
+number of worker threads. For example, to process images using four threads and
+silence the progress display:
+
+```bash
+python -m bitmap2svg.cli batch path/to/images/ out --jobs 4 --quiet
+```
+
 ### FastAPI Service
 
 To run the FastAPI service, execute:
