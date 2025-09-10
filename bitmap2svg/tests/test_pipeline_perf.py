@@ -9,7 +9,7 @@ from bitmap2svg.config import Settings
 from bitmap2svg.pipeline import (
     vectorise,
     vectorise_batch,
-    _potrace_trace_cached,
+    _trace_cached,
 )
 
 
@@ -25,19 +25,19 @@ def sample_image(tmp_path):
 
 def test_caching(sample_image):
     cfg = Settings()
-    _potrace_trace_cached.cache_clear()
+    _trace_cached.cache_clear()
     vectorise(sample_image, cfg)
-    first_hits = _potrace_trace_cached.cache_info().hits
+    first_hits = _trace_cached.cache_info().hits
     vectorise(sample_image, cfg)
-    second_hits = _potrace_trace_cached.cache_info().hits
+    second_hits = _trace_cached.cache_info().hits
     assert second_hits > first_hits
 
 
 def test_vectorise_batch(sample_image):
     cfg = Settings()
-    _potrace_trace_cached.cache_clear()
+    _trace_cached.cache_clear()
     images = [sample_image, sample_image]
     results = vectorise_batch(images, cfg)
     assert len(results) == 2
-    assert _potrace_trace_cached.cache_info().hits > 0
+    assert _trace_cached.cache_info().hits > 0
 
