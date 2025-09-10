@@ -2,13 +2,13 @@
 
 # Bitmap2SVG
 
-Bitmap2SVG is a hybrid Potrace and geometry-based vectorization pipeline designed to convert flat-color logos into scalable vector graphics (SVG). This project leverages various image processing techniques, including k-means clustering, Ramer-Douglas-Peucker simplification, and swarm optimization, to produce high-quality vector representations of bitmap images.
+Bitmap2SVG is a geometry-based vectorization pipeline that uses OpenCV contours to convert flat-color logos into scalable vector graphics (SVG). This project leverages various image processing techniques, including k-means clustering, Ramer-Douglas-Peucker simplification, and swarm optimization, to produce high-quality vector representations of bitmap images.
 
 ## Features
 
 - **Image Ingestion**: Load and normalize images in various formats.
 - **Segmentation**: Segment images into layers using k-means clustering.
-- **Vectorization**: Convert bitmap images to vector paths using Potrace.
+- **Vectorization**: Convert bitmap images to vector paths using OpenCV contours.
 - **Simplification**: Simplify polylines with the Ramer-Douglas-Peucker algorithm.
 - **Bezier Fitting**: Fit cubic Bézier curves to polylines for smoother paths.
 - **Quality Assurance**: Evaluate generated SVGs against original images using metrics like SSIM and edge IoU.
@@ -25,7 +25,7 @@ pip install -U pip
 pip install -e .
 ```
 
-Make sure to have the necessary libraries installed, including `numpy`, `opencv-python`, `Pillow`, `svgwrite`, `shapely`, `pyclipper`, `rdp`, `pydantic`, `typer`, `rich`, and `potrace-wrapped`.
+Make sure to have the necessary libraries installed, including `numpy`, `opencv-python`, `Pillow`, `svgwrite`, `shapely`, `pyclipper`, `rdp`, `pydantic`, `typer`, and `rich`.
 
 ## Usage
 
